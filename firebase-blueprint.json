@@ -1,0 +1,63 @@
+{
+  "entities": {
+    "Session": {
+      "title": "Training Session",
+      "description": "A record of a single training call simulation.",
+      "type": "object",
+      "properties": {
+        "empId": {
+          "type": "string",
+          "description": "The employee ID of the advocate."
+        },
+        "location": {
+          "type": "string",
+          "description": "The location of the advocate."
+        },
+        "scenarioId": {
+          "type": "string",
+          "description": "The ID of the scenario played."
+        },
+        "scenarioName": {
+          "type": "string",
+          "description": "The name of the scenario played."
+        },
+        "transcript": {
+          "type": "string",
+          "description": "The full transcript of the call."
+        },
+        "scores": {
+          "type": "object",
+          "description": "The scores for each criteria.",
+          "properties": {
+            "intro": { "type": "integer" },
+            "address": { "type": "integer" },
+            "vehicle": { "type": "integer" },
+            "eta": { "type": "integer" },
+            "insurance": { "type": "integer" },
+            "license": { "type": "integer" }
+          }
+        },
+        "summary": {
+          "type": "string",
+          "description": "The coach's feedback summary."
+        },
+        "rating": {
+          "type": "integer",
+          "description": "The overall percentage rating."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the session was completed."
+        }
+      },
+      "required": ["empId", "location", "transcript", "rating"]
+    }
+  },
+  "firestore": {
+    "sessions/{sessionId}": {
+      "schema": "Session",
+      "description": "Collection of training sessions."
+    }
+  }
+}

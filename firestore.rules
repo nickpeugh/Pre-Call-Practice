@@ -1,0 +1,124 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ===============================================================
+    // Assumed Data Model
+    // ===============================================================
+    //
+    // Collection: sessions
+    // Document ID: {sessionId}
+    // Fields:
+    //   - empId: string (required) - Employee ID of the advocate
+    //   - location: string (required) - Location of the advocate
+    //   - scenarioId: string (optional) - ID of the scenario played
+    //   - scenarioName: string (optional) - Name of the scenario played
+    //   - transcript: string (required) - Full transcript of the call
+    //   - scores: map (optional) - Scores for each criteria
+    //   - summary: string (optional) - Coach's feedback summary
+    //   - rating: number (required) - Overall percentage rating
+    //   - createdAt: string (optional) - ISO 8601 timestamp
+    //   - uid: string (required) - UID of the user who created the session
+    //
+    // ===============================================================
+
+    // ===============================================================
+    // Helper Functions
+    // ===============================================================
+
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    function isDocOwner() {
+      return isAuthenticated() && request.auth.uid == resource.data.uid;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() &&
+        (get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin' ||
+          (request.auth.token.email == "nick.peugh@carvana.com" && request.auth.token.email_verified == true));
+    }
+
+    function hasRequiredFields(fields) {
+      return request.resource.data.keys().hasAll(fields);
+    }
+
+    function hasOnlyAllowedFields(fields) {
+      return request.resource.data.keys().hasOnly(fields);
+    }
+
+    function uidUnchanged() {
+      return !('uid' in request.resource.data) ||
+        request.resource.data.uid == request.auth.uid;
+    }
+
+    function uidNotModified() {
+      return !('uid' in request.resource.data) ||
+        request.resource.data.uid == resource.data.uid;
+    }
+
+    function isValidEmail(email) {
+      return email is string &&
+        email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
+    }
+
+    function isValidDateString(dateStr) {
+      return dateStr is string &&
+        dateStr.matches("^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}.*Z?$");
+    }
+
+    // Domain Validators
+    function isValidSession(data) {
+      return hasRequiredFields(['empId', 'location', 'transcript', 'rating', 'uid']) &&
+             hasOnlyAllowedFields(['empId', 'location', 'scenarioId', 'scenarioName', 'transcript', 'scores', 'summary', 'rating', 'createdAt', 'uid']) &&
+             data.empId is string && data.empId.size() > 0 && data.empId.size() < 50 &&
+             data.location is string && data.location.size() > 0 && data.location.size() < 100 &&
+             data.transcript is string && data.transcript.size() < 100000 &&
+             data.rating is number && data.rating >= 0 && data.rating <= 100 &&
+             (!('createdAt' in data) || isValidDateString(data.createdAt)) &&
+             data.uid is string;
+    }
+
+    // ===============================================================
+    // Rules
+    // ===============================================================
+
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Sessions collection
+    match /sessions/{sessionId} {
+      // Allow reading if authenticated (even anonymously)
+      // This allows users to see history by empId
+      allow read: if isAuthenticated();
+      
+      // Users can create sessions if authenticated
+      allow create: if isAuthenticated() && 
+                      isValidSession(request.resource.data);
+      
+      // Allow updates if the empId matches (to allow adding feedback/summary)
+      allow update: if isAuthenticated() && 
+                      isValidSession(request.resource.data) && 
+                      (resource.data.empId == request.resource.data.empId || isAdmin());
+      
+      allow delete: if isAdmin();
+    }
+
+    // Users collection (for roles)
+    match /users/{userId} {
+      allow read: if isAuthenticated() && (isOwner(userId) || isAdmin());
+      
+      // Only admins can create or update user roles
+      allow create, update: if isAdmin() && 
+                              hasOnlyAllowedFields(['role', 'email', 'name']) &&
+                              request.resource.data.role in ['admin', 'user'];
+    }
+  }
+}

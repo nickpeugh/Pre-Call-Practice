@@ -1,0 +1,7 @@
+{
+  "name": "Pre-Call Practice",
+  "description": "A mobile-first real-time voice simulator for training customer advocates using Gemini Live API.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
