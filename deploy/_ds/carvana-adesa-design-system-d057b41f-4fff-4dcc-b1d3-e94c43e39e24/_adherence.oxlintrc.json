@@ -1,0 +1,233 @@
+{
+  "plugins": [
+    "react",
+    "import"
+  ],
+  "rules": {
+    "react/forbid-elements": [
+      "warn",
+      {
+        "forbid": []
+      }
+    ],
+    "no-restricted-imports": [
+      "warn",
+      {
+        "patterns": [
+          {
+            "group": [
+              "slides/**"
+            ],
+            "message": "Import design-system components from 'index.js', not component internals."
+          }
+        ]
+      }
+    ],
+    "no-restricted-syntax": [
+      "warn",
+      {
+        "selector": "Literal[value=/#[0-9a-fA-F]{3,8}\\b/]",
+        "message": "Raw hex color — use a design-system color token via var()."
+      },
+      {
+        "selector": "Literal[value=/\\b\\d+px\\b/]",
+        "message": "Raw px value — use a design-system spacing token via var()."
+      },
+      {
+        "selector": "Literal[value=/font-family\\s*:\\s*(?!['\\\"]?(?:Barlow Condensed|Inter))/i]",
+        "message": "Font not provided by the design system. Available: Barlow Condensed, Inter."
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/index.js"
+      ],
+      "rules": {
+        "no-restricted-imports": "off"
+      }
+    }
+  ],
+  "x-omelette": {
+    "components": {},
+    "tokens": [
+      "--body-lg",
+      "--body-md",
+      "--body-sm",
+      "--body-xl",
+      "--border-default",
+      "--border-on-navy",
+      "--border-subtle",
+      "--brand-carvana-blue",
+      "--brand-cyan",
+      "--brand-navy",
+      "--brand-navy-deep",
+      "--brand-teal",
+      "--brand-teal-dark",
+      "--brand-warm-gray",
+      "--brand-yellow",
+      "--carvana-blue",
+      "--display-2xl",
+      "--display-3xl",
+      "--display-lg",
+      "--display-md",
+      "--display-tracking",
+      "--display-weight",
+      "--display-xl",
+      "--fg-accent",
+      "--fg1",
+      "--fg1-inv",
+      "--fg2",
+      "--fg2-inv",
+      "--fg3",
+      "--font-body",
+      "--font-display",
+      "--gray-100",
+      "--gray-200",
+      "--gray-300",
+      "--gray-400",
+      "--gray-50",
+      "--gray-500",
+      "--gray-600",
+      "--gray-700",
+      "--gray-800",
+      "--label",
+      "--navy-600",
+      "--navy-700",
+      "--navy-800",
+      "--navy-900",
+      "--radius-lg",
+      "--radius-md",
+      "--radius-pill",
+      "--radius-sm",
+      "--radius-xl",
+      "--shadow-lg",
+      "--shadow-md",
+      "--shadow-sm",
+      "--slide-pad-x",
+      "--slide-pad-y",
+      "--space-2xl",
+      "--space-2xs",
+      "--space-3xl",
+      "--space-4xl",
+      "--space-lg",
+      "--space-md",
+      "--space-sm",
+      "--space-xl",
+      "--space-xs",
+      "--surface-light",
+      "--surface-navy",
+      "--surface-warm",
+      "--surface-white",
+      "--teal-200",
+      "--teal-400",
+      "--teal-500",
+      "--teal-600",
+      "--teal-700",
+      "--teal-800",
+      "--text-accent",
+      "--text-body",
+      "--text-default",
+      "--text-muted",
+      "--text-on-navy",
+      "--text-on-navy-muted",
+      "--warm-gray",
+      "--warm-gray-light",
+      "--white",
+      "--yellow-400",
+      "--yellow-500"
+    ],
+    "tokenKinds": {
+      "--navy-900": "color",
+      "--navy-800": "color",
+      "--navy-700": "color",
+      "--navy-600": "color",
+      "--carvana-blue": "color",
+      "--teal-800": "color",
+      "--teal-700": "color",
+      "--teal-600": "color",
+      "--teal-500": "color",
+      "--teal-400": "color",
+      "--teal-200": "color",
+      "--yellow-500": "color",
+      "--yellow-400": "color",
+      "--warm-gray": "color",
+      "--warm-gray-light": "color",
+      "--white": "color",
+      "--gray-50": "color",
+      "--gray-100": "color",
+      "--gray-200": "color",
+      "--gray-300": "color",
+      "--gray-400": "color",
+      "--gray-500": "color",
+      "--gray-600": "color",
+      "--gray-700": "color",
+      "--gray-800": "color",
+      "--brand-navy": "color",
+      "--brand-navy-deep": "color",
+      "--brand-teal": "color",
+      "--brand-teal-dark": "color",
+      "--brand-cyan": "color",
+      "--brand-yellow": "color",
+      "--brand-warm-gray": "color",
+      "--brand-carvana-blue": "color",
+      "--surface-navy": "color",
+      "--surface-white": "color",
+      "--surface-light": "color",
+      "--surface-warm": "color",
+      "--text-default": "font",
+      "--text-body": "font",
+      "--text-muted": "font",
+      "--text-on-navy": "font",
+      "--text-on-navy-muted": "font",
+      "--text-accent": "font",
+      "--border-subtle": "color",
+      "--border-default": "color",
+      "--border-on-navy": "color",
+      "--font-display": "font",
+      "--font-body": "font",
+      "--display-weight": "font",
+      "--display-tracking": "font",
+      "--display-3xl": "spacing",
+      "--display-2xl": "spacing",
+      "--display-xl": "spacing",
+      "--display-lg": "spacing",
+      "--display-md": "spacing",
+      "--body-xl": "spacing",
+      "--body-lg": "spacing",
+      "--body-md": "spacing",
+      "--body-sm": "spacing",
+      "--label": "spacing",
+      "--space-2xs": "spacing",
+      "--space-xs": "spacing",
+      "--space-sm": "spacing",
+      "--space-md": "spacing",
+      "--space-lg": "spacing",
+      "--space-xl": "spacing",
+      "--space-2xl": "spacing",
+      "--space-3xl": "spacing",
+      "--space-4xl": "spacing",
+      "--slide-pad-x": "spacing",
+      "--slide-pad-y": "spacing",
+      "--radius-sm": "radius",
+      "--radius-md": "radius",
+      "--radius-lg": "radius",
+      "--radius-xl": "radius",
+      "--radius-pill": "radius",
+      "--shadow-sm": "shadow",
+      "--shadow-md": "shadow",
+      "--shadow-lg": "shadow",
+      "--fg1": "color",
+      "--fg2": "color",
+      "--fg3": "color",
+      "--fg-accent": "color",
+      "--fg1-inv": "color",
+      "--fg2-inv": "color"
+    },
+    "fontFamilies": [
+      "Barlow Condensed",
+      "Inter"
+    ]
+  }
+}

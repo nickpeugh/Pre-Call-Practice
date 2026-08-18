@@ -1,0 +1,14 @@
+/* ============================================================
+   Carvana × ADESA — Design System root stylesheet
+   Link THIS one file to pull in the whole foundation:
+
+     <link rel="stylesheet" href="styles.css">
+
+   It re-exports the fonts, tokens, and the fg1/h1/eyebrow
+   convenience layer. The slide-kit layout sheets
+   (slides/deck.css, slides/arb.css) are deck-specific and are
+   linked directly by those decks — they build on these tokens.
+   ============================================================ */
+
+@import url('./styles/tokens.css');   /* fonts + colors + type + spacing */
+@import url('./colors_and_type.css');  /* fg1 / h1 / eyebrow helpers */

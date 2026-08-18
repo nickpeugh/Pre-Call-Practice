@@ -1,20 +1,44 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Carvana × ADESA Onboarding Tracker — deploy
 
-# Run and deploy your AI Studio app
+This service hosts the static **Onboarding Tracker** bundle (in [`deploy/`](deploy/))
+behind a small Express server so it can run on Cloud Run.
 
-This contains everything you need to run your app locally.
+The bundle is a self-contained static build — relative paths, no framework build
+step. The server just serves the folder with `index.html` at the root and sets a
+permissive `frame-ancestors` CSP so the app can be embedded (e.g. Google Sites).
 
-View your app in AI Studio: https://ai.studio/apps/0aff2e82-f1da-4d45-9a3c-f6b81835baeb
+## Run locally
 
-## Run Locally
+```
+npm install
+npm start        # tsx server.ts → http://localhost:3000
+```
 
-**Prerequisites:**  Node.js
+You should land on the navy Okta sign-in screen; the demo sign-in works with no
+backend configured.
 
+## Layout
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+```
+server.ts             static host + /api/health
+deploy/               the app bundle (served at /)
+  index.html          the app
+  support.js          runtime it needs — must sit next to index.html
+  values-images.js    Carvana Values artwork
+  assets/             logos, lockups, app icons, brand graphics
+  _ds/                design system stylesheets and fonts
+  README.md           hosting notes
+  INTEGRATION.md      backend API spec (Slack / email / Okta / shared checklists)
+```
+
+## Backend integration
+
+The app runs fully in a local/demo mode until a manager sets a **Host API base URL**
+under **Sharing → Slack & email connections**. Standing up those routes
+(`/slack/notify`, `/email/send`, `/auth/*`, `/checklists/*`) against Carvana infra
+is documented in [`deploy/INTEGRATION.md`](deploy/INTEGRATION.md). They must sit on
+the same origin as the app (e.g. app at `/`, API at `/api`) so the Okta session
+cookie works without token handling.
+
+> Editing after deploy: change the source bundle and redeploy — a redeploy
+> overwrites the served copy, so don't hand-edit files under `deploy/`.
