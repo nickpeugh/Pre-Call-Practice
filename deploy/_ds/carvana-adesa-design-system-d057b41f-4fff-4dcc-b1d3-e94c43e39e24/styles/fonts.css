@@ -1,0 +1,62 @@
+/* ============================================================
+   Carvana × ADESA — Fonts
+   Display: Barlow Condensed (ExtraBold 800, used ALL CAPS for titles)
+   Body:    Inter (400 / 500 / 600 / 700)
+   ------------------------------------------------------------
+   Both families are bundled locally as .woff2 in ../fonts/ — the
+   system is fully self-contained and works offline. Barlow
+   Condensed (latin) is the genuine typeface from the deck.
+   ============================================================ */
+
+/* ---------- Barlow Condensed (display, local) --------------- */
+@font-face {
+  font-family: 'Barlow Condensed';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('../fonts/BarlowCondensed-600.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Barlow Condensed';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../fonts/BarlowCondensed-700.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Barlow Condensed';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url('../fonts/BarlowCondensed-800.woff2') format('woff2');
+}
+
+/* ---------- Inter (body / UI, local) ------------------------ */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/Inter-400.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('../fonts/Inter-500.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('../fonts/Inter-600.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../fonts/Inter-700.woff2') format('woff2');
+}

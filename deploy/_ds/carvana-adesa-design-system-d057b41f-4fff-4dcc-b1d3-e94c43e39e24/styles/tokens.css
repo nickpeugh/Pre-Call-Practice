@@ -1,0 +1,129 @@
+/* ============================================================
+   Carvana × ADESA — Design Tokens
+   Import this single file to get fonts + colors + type + spacing.
+
+     <link rel="stylesheet" href="styles/tokens.css">
+
+   Then use the semantic custom properties (--brand-navy, --text-on-navy,
+   --display-2xl, --space-lg …) rather than the raw reference values.
+   ============================================================ */
+
+@import url('./fonts.css');
+
+:root {
+  /* ---------- Reference palette ---------------------------- */
+
+  /* Carvana navy — primary dark anchor (deck backgrounds, headings) */
+  --navy-900: #0a2a48;
+  --navy-800: #0d375e;   /* THE brand navy */
+  --navy-700: #134a7c;
+  --navy-600: #1a5a96;
+
+  /* Carvana blue — logomark disc only */
+  --carvana-blue: #228be6;
+
+  /* ADESA teal ramp */
+  --teal-800: #074a57;
+  --teal-700: #095c6b;   /* dark teal */
+  --teal-600: #0c8599;   /* THE brand teal */
+  --teal-500: #1aa3b8;
+  --teal-400: #3bc9db;   /* bright cyan — stars, icons, accents */
+  --teal-200: #99e9f2;
+
+  /* Carvana yellow — sparing accent (the halo) */
+  --yellow-500: #fab005;
+  --yellow-400: #ffc935;
+
+  /* Warm gray — secondary neutral from the deck theme */
+  --warm-gray: #c8c4b7;
+  --warm-gray-light: #e7e4dc;
+
+  /* Cool neutrals */
+  --white: #ffffff;
+  --gray-50:  #f8f9fa;
+  --gray-100: #f1f3f5;
+  --gray-200: #e9ecef;
+  --gray-300: #dee2e6;
+  --gray-400: #ced4da;
+  --gray-500: #adb5bd;
+  --gray-600: #868e96;
+  --gray-700: #495057;
+  --gray-800: #343a40;
+
+  /* ---------- Semantic — brand --------------------------------- */
+  --brand-navy:        var(--navy-800);
+  --brand-navy-deep:   var(--navy-900);
+  --brand-teal:        var(--teal-600);
+  --brand-teal-dark:   var(--teal-700);
+  --brand-cyan:        var(--teal-400);
+  --brand-yellow:      var(--yellow-500);
+  --brand-warm-gray:   var(--warm-gray);
+  --brand-carvana-blue:var(--carvana-blue);
+
+  /* ---------- Semantic — surfaces ------------------------------ */
+  --surface-navy:    var(--navy-800);   /* hero / section / closing */
+  --surface-white:   var(--white);      /* default content slide   */
+  --surface-light:   var(--gray-50);    /* gentle section break     */
+  --surface-warm:    var(--warm-gray-light);
+
+  /* ---------- Semantic — text ---------------------------------- */
+  --text-default:    var(--navy-800);   /* headings + body on light */
+  --text-body:       #2b3a4a;           /* long-form body on light  */
+  --text-muted:      var(--gray-600);
+  --text-on-navy:    var(--white);
+  --text-on-navy-muted: #a9c2da;
+  --text-accent:     var(--teal-600);
+
+  /* ---------- Borders & dividers ------------------------------- */
+  --border-subtle:   var(--gray-200);
+  --border-default:  var(--gray-300);
+  --border-on-navy:  rgba(255,255,255,.18);
+
+  /* ---------- Type families ------------------------------------ */
+  --font-display: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  --font-body:    'Inter', -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  /* Display is ALWAYS used at 800 weight, all-caps */
+  --display-weight: 800;
+  --display-tracking: 0.01em;
+
+  /* ---------- Type scale (deck = 1280×720 reference) ----------- */
+  --display-3xl: 112px;   /* cover title           */
+  --display-2xl: 80px;    /* section / hero title  */
+  --display-xl:  60px;    /* slide headline        */
+  --display-lg:  44px;    /* sub-headline          */
+  --display-md:  32px;    /* eyebrow / kicker big  */
+
+  --body-xl: 24px;
+  --body-lg: 20px;
+  --body-md: 17px;
+  --body-sm: 15px;
+  --label:   13px;        /* eyebrow / overline    */
+
+  /* ---------- Spacing scale ------------------------------------ */
+  --space-2xs: 4px;
+  --space-xs:  8px;
+  --space-sm:  12px;
+  --space-md:  16px;
+  --space-lg:  24px;
+  --space-xl:  32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  --space-4xl: 88px;
+
+  /* slide safe-area padding at 1280×720 */
+  --slide-pad-x: 80px;
+  --slide-pad-y: 64px;
+
+  /* ---------- Radii -------------------------------------------- */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-pill: 999px;
+
+  /* ---------- Elevation (used sparingly) ----------------------- */
+  --shadow-sm: 0 1px 2px rgba(13,55,94,.08), 0 1px 3px rgba(13,55,94,.06);
+  --shadow-md: 0 4px 12px rgba(13,55,94,.10), 0 2px 4px rgba(13,55,94,.06);
+  --shadow-lg: 0 16px 40px rgba(13,55,94,.16);
+}

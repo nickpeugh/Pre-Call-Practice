@@ -1,0 +1,57 @@
+/* ============================================================
+   Carvana × ADESA — colors_and_type convenience sheet
+   A thin layer of "fg1 / h1 / body" helpers on top of tokens.css.
+   Import tokens.css first (or this file imports it for you).
+   ============================================================ */
+
+@import url('./styles/tokens.css');
+
+:root {
+  /* Foreground shorthands (on light surfaces) */
+  --fg1: var(--text-default);   /* primary navy text   */
+  --fg2: var(--text-body);      /* body text           */
+  --fg3: var(--text-muted);     /* muted / captions    */
+  --fg-accent: var(--text-accent);
+
+  /* On-navy shorthands */
+  --fg1-inv: var(--text-on-navy);
+  --fg2-inv: var(--text-on-navy-muted);
+}
+
+/* ---------- Type primitives ---------------------------------- */
+
+.display-title,
+.h-display {
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  text-transform: uppercase;
+  letter-spacing: var(--display-tracking);
+  line-height: 0.96;
+  color: var(--fg1);
+  margin: 0;
+}
+
+.h1 { font: var(--display-weight) var(--display-2xl)/0.96 var(--font-display); text-transform: uppercase; letter-spacing: var(--display-tracking); color: var(--fg1); margin: 0; }
+.h2 { font: var(--display-weight) var(--display-xl)/0.98 var(--font-display); text-transform: uppercase; letter-spacing: var(--display-tracking); color: var(--fg1); margin: 0; }
+.h3 { font: var(--display-weight) var(--display-lg)/1.0 var(--font-display); text-transform: uppercase; letter-spacing: var(--display-tracking); color: var(--fg1); margin: 0; }
+
+/* Eyebrow / overline — Inter, uppercase, tracked, teal */
+.eyebrow {
+  font: 600 var(--label)/1 var(--font-body);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--fg-accent);
+  margin: 0;
+}
+
+/* Body copy — always Inter, never below 15px on a slide */
+.lead { font: 400 var(--body-xl)/1.45 var(--font-body); color: var(--fg2); margin: 0; }
+.body { font: 400 var(--body-md)/1.55 var(--font-body); color: var(--fg2); margin: 0; }
+.body-sm { font: 400 var(--body-sm)/1.5 var(--font-body); color: var(--fg3); margin: 0; }
+
+/* Inverse helpers for navy slides */
+.on-navy { color: var(--fg1-inv); }
+.on-navy .body,
+.on-navy .lead { color: var(--fg2-inv); }
+.on-navy .display-title,
+.on-navy .h1, .on-navy .h2, .on-navy .h3 { color: var(--fg1-inv); }
